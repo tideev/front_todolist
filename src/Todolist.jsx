@@ -1,4 +1,5 @@
 import { useState } from "react";
+import TodoTable from "./components/TodoTable";
 
 export default function Todolist() {
     // States
@@ -22,22 +23,11 @@ export default function Todolist() {
     };
 
 
-    const itemRows = todos.map((todo, index) => (
-        <tr key={index}>
-            <td>{todo.description}</td>
-            <td style={{ paddingLeft: "50px", paddingRight: "50px" }}> - </td>
-            <td>{todo.date}</td>
-            <td style={{ padding: "10px" }}>
-                <button onClick={() => deleteTodo(todo.id)}>Delete</button>
-            </td>
-        </tr>
-    ));
-
     //return
     return (
         <>
             <h1>To do -list</h1>
-            Discription:
+            Description:
             <input
                 type="text"
                 name="description"
@@ -54,17 +44,8 @@ export default function Todolist() {
             />
             <button onClick={addTodo}>Add Todo</button>
             <div>
-                <table>
-                    <tbody>
-                        <tr>
-                            <th>Description</th>
-                            <td style={{ paddingLeft: "50px", paddingRight: "50px" }}>   </td>
-                            <th>Date</th>
-                        </tr>
-                        {itemRows}
-                    </tbody>
-                </table>
+                <TodoTable todos={todos} onDelete={deleteTodo} />
             </div>
         </>
-    );
+    )
 }
